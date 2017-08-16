@@ -4,9 +4,9 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class StatefulListServiceApplication {
+public class StatefulListApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(StatefulListServiceApplication.class, args);
+		SpringApplication.run(StatefulListApplication.class, args);
 	}
 }
