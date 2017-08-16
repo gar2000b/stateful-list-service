@@ -1,8 +1,10 @@
-package com.onlineinteract;
+package com.rbc;
 
 import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
+
+import com.rbc.Main;
 
 public class MainTest {
 
