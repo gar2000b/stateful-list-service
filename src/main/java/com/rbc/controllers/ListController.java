@@ -64,7 +64,50 @@ public class ListController {
 		hashmap.put("Location", "Toronto");
 		return hashmap;
 	}
+	
+	/**
+	 * curl -i -H "Content-Type:application/json" http://localhost:8080/listhashmap
+	 * 
+	 * @return
+	 */
+	@RequestMapping(method = RequestMethod.GET, produces = "application/json", value = "/listhashmap")
+	@ResponseBody
+	public List<Map<String, String>> getListHashMap() {
+		List<Map<String, String>> list = new ArrayList<>();
+		Map<String, String> hashmap = new HashMap<>();
+		hashmap.put("name", "Gary");
+		hashmap.put("DOB", "21/01/80");
+		hashmap.put("Location", "Toronto");
+		list.add(hashmap);
+		
+		hashmap = new HashMap<>();
+		hashmap.put("name", "Jack");
+		hashmap.put("DOB", "21/01/80");
+		hashmap.put("Location", "Vancouver");
+		list.add(hashmap);
+		
+		hashmap = new HashMap<>();
+		hashmap.put("name", "Jane");
+		hashmap.put("DOB", "21/01/80");
+		hashmap.put("Location", "Calgary");
+		list.add(hashmap);
+		
+		return list;
+	}
 
+	/**
+	 * curl -i -H "Content-Type:application/json" -X POST --data '[{"DOB":"21/01/80","name":"Gary","Location":"Toronto"},{"DOB":"21/01/80","name":"Jack","Location":"Vancouver"},{"DOB":"21/01/80","name":"Jane","Location":"Calgary"}]' http://localhost:8080/listhashmap
+	 * 
+	 * @param value
+	 * @return
+	 */
+	@RequestMapping(method = RequestMethod.POST, consumes = "application/json", produces = "application/json", value = "/listhashmap")
+	@ResponseBody
+	public List<Map<String, String>> addHashMap(@RequestBody List<Map<String, String>> value) {
+		System.out.println("do we get here?");
+		return value;
+	}
+	
 	/**
 	 * curl -i -H "Content-Type:application/json" -X POST --data '{"DOB":"21/01/80","name":"Gary","Location":"Toronto"}' http://localhost:8080/hashmap
 	 * 
