@@ -5,11 +5,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import javax.validation.Valid;
-
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -45,8 +42,6 @@ public class ListController {
 	@RequestMapping(method = RequestMethod.GET, produces = "text/plain", value = "/")
 	@ResponseBody
 	public String getArrayList() {
-		MediaType applicationJsonUtf8 = MediaType.APPLICATION_JSON_UTF8;
-		String applicationJsonUtf8Value = MediaType.APPLICATION_JSON_UTF8_VALUE;
 		return list.toString();
 	}
 
@@ -103,7 +98,7 @@ public class ListController {
 	 */
 	@RequestMapping(method = RequestMethod.POST, consumes = "application/json", produces = "application/json", value = "/listhashmap")
 	@ResponseBody
-	public List<Map<String, String>> addHashMap(@RequestBody List<Map<String, String>> value) {
+	public List<Map<String, String>> addListHashMap(@RequestBody List<Map<String, String>> value) {
 		System.out.println("do we get here?");
 		return value;
 	}
