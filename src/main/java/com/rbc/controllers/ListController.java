@@ -50,6 +50,11 @@ public class ListController {
 		return list.toString();
 	}
 
+	/**
+	 * curl -i -H "Content-Type:application/json" http://localhost:8080/hashmap
+	 * 
+	 * @return
+	 */
 	@RequestMapping(method = RequestMethod.GET, produces = "application/json", value = "/hashmap")
 	@ResponseBody
 	public Map<String, String> getHashMap() {
