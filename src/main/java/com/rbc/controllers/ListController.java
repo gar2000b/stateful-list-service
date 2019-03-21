@@ -1,10 +1,15 @@
 package com.rbc.controllers;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+
+import javax.validation.Valid;
 
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -40,13 +45,39 @@ public class ListController {
 	@RequestMapping(method = RequestMethod.GET, produces = "text/plain", value = "/")
 	@ResponseBody
 	public String getArrayList() {
+		MediaType applicationJsonUtf8 = MediaType.APPLICATION_JSON_UTF8;
+		String applicationJsonUtf8Value = MediaType.APPLICATION_JSON_UTF8_VALUE;
 		return list.toString();
 	}
 
+	@RequestMapping(method = RequestMethod.GET, produces = "application/json", value = "/hashmap")
+	@ResponseBody
+	public Map<String, String> getHashMap() {
+		Map<String, String> hashmap = new HashMap<>();
+		hashmap.put("name", "Gary");
+		hashmap.put("DOB", "21/01/80");
+		hashmap.put("Location", "Toronto");
+		return hashmap;
+	}
+
+	/**
+	 * curl -i -H "Content-Type:application/json" -X POST --data '{"DOB":"21/01/80","name":"Gary","Location":"Toronto"}' http://localhost:8080/hashmap
+	 * 
+	 * @param value
+	 * @return
+	 */
+	@RequestMapping(method = RequestMethod.POST, consumes = "application/json", produces = "application/json", value = "/hashmap")
+	@ResponseBody
+	public Map<String, String> addHashMap(@RequestBody Map<String, String> value) {
+		System.out.println("do we get here?");
+		return value;
+	}
+	
 	/**
 	 * Adds new value to array list
 	 * 
-	 * curl -i -H "Content-Type:text/plain" -X POST --data 'abc' http://localhost:8080/
+	 * curl -i -H "Content-Type:text/plain" -X POST --data 'abc'
+	 * http://localhost:8080/
 	 * 
 	 * @param value
 	 * @return ResponseEntity
@@ -57,11 +88,12 @@ public class ListController {
 		list.add(value);
 		return new ResponseEntity<>(value + " added to list", HttpStatus.OK);
 	}
-	
+
 	/**
 	 * Updates value on array list
 	 * 
-	 * curl -i -H "Content-Type:text/plain" -X POST --data 'klm' http://localhost:8080/2
+	 * curl -i -H "Content-Type:text/plain" -X POST --data 'klm'
+	 * http://localhost:8080/2
 	 * 
 	 * @param position
 	 * @param value
@@ -73,11 +105,12 @@ public class ListController {
 		list.set(position, value);
 		return new ResponseEntity<>(value + " updated on list", HttpStatus.OK);
 	}
-	
+
 	/**
 	 * Removes value from array list
 	 * 
-	 * curl -i -H "Content-Type:text/plain" -X DELETE --data 'abc' http://localhost:8080/
+	 * curl -i -H "Content-Type:text/plain" -X DELETE --data 'abc'
+	 * http://localhost:8080/
 	 * 
 	 * @param value
 	 * @return
