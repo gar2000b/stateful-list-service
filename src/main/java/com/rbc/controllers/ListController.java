@@ -46,13 +46,14 @@ public class ListController {
 	}
 
 	/**
-	 * curl -i -H "Content-Type:application/json" http://localhost:8080/hashmap
+	 * curl -i -H "Content-Type:application/json" -X GET 'http://localhost:8080/hashmap' -d '{"key":"value"}'
 	 * 
 	 * @return
 	 */
-	@RequestMapping(method = RequestMethod.GET, produces = "application/json", value = "/hashmap")
+	@RequestMapping(method = RequestMethod.GET, consumes = "application/json", produces = "application/json", value = "/hashmap")
 	@ResponseBody
-	public Map<String, String> getHashMap() {
+	public Map<String, String> getHashMap(@RequestBody String data) {
+		System.out.println(data);
 		Map<String, String> hashmap = new HashMap<>();
 		hashmap.put("name", "Gary");
 		hashmap.put("DOB", "21/01/80");
